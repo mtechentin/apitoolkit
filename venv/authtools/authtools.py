@@ -2,7 +2,7 @@ from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import BackendApplicationClient, TokenExpiredError
 
 
-def get_token(**kwargs):
+def get_access_token(**kwargs):
     '''
     Retrieve stored token, refresh if expired, store and output updated token
 

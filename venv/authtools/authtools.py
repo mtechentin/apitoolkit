@@ -29,7 +29,7 @@ def get_access_token(**kwargs):
     client_id = kwargs['client_id']
     client_secret = kwargs['client_secret']
     token_url = kwargs['token_url']
-    protected_url = kwargs['token_url']
+    protected_url = kwargs['protected_url']
 
     # Retrieve and test old token.  Return if valid.
     try:

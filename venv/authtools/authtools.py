@@ -38,6 +38,7 @@ def get_access_token(**kwargs):
 
     return token['token']
 
+
 def save_token(token):
     '''
     Store token
@@ -46,9 +47,13 @@ def save_token(token):
     ----------
     token: dict
     '''
-    file = open('token.py', 'w')
-    file.write(token)
-    file.close()
+    try:
+        file = open('token.py', 'w')
+        file.write(token)
+        file.close()
+    except SaveError as error:
+        print(error.message)
+
 
 def retrieve_token():
     '''
@@ -66,11 +71,12 @@ def retrieve_token():
     except:
         raise ValueError
 
+
 def new_token(client_id, client_secret, token_url):
     '''
     Generate and return new token dict
 
-    Paramaters
+    Parameters
     ----------
     client_id: str
     client_secret: str
@@ -85,3 +91,15 @@ def new_token(client_id, client_secret, token_url):
     token = oauth.fetch_token(token_url=token_url, client_id=client_id,
                               client_secret=client_secret)
     return token
+
+
+class SaveError(Exception):
+    '''Token save exception stub'''
+    def __init__(self, message):
+        self.message = 'Error. Unable to save token.'
+
+
+class TokenError(Exception):
+    '''Token generation exception stub'''
+    def __init__(self, message):
+        self.message = 'Error. Unable to generate token'

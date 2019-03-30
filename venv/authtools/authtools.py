@@ -24,7 +24,7 @@ def get_access_token(**kwargs):
     token_url = kwargs['token_url']
     protected_url = kwargs['token_url']
 
-    # Retrieve and test old token.  Refresh if non-existant or expired and save updated token.
+    # Retrieve and test old token.  Refresh if non-existent or expired and save updated token.
     try:
         token = retrieve_token()
         client = OAuth2Session(client_id, token=token)

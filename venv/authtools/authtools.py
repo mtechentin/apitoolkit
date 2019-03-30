@@ -86,10 +86,14 @@ def new_token(client_id, client_secret, token_url):
     -------
     token: dict
     '''
-    client = BackendApplicationClient(client_id=client_id)
-    oauth = OAuth2Session(client=client)
-    token = oauth.fetch_token(token_url=token_url, client_id=client_id,
-                              client_secret=client_secret)
+    try:
+        client = BackendApplicationClient(client_id=client_id)
+        oauth = OAuth2Session(client=client)
+        token = oauth.fetch_token(token_url=token_url, client_id=client_id,
+                                  client_secret=client_secret)
+    except TokenError as error:
+        print(error.message)
+
     return token
 
 

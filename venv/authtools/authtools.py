@@ -18,6 +18,7 @@ def get_access_token(**kwargs):
             Access Token
 
     Notes:
+        None of this has been tested.  On anything.  At all.
         The 'Bearer ' prefix is omitted from the Access Token and must be
             added post-function-call
         No support for refresh tokens yet.  Stay tuned.

@@ -6,18 +6,16 @@ def get_access_token(**kwargs):
     '''
     Retrieve stored token, refresh if expired, store and output updated token
 
-    Parameters
-    ----------
-    client_id: str
-    client_secret: str
-    token_url: str
-    protected_url: str
-        Any API endpoint to test existing access token
+    Args:
+        client_id: str
+        client_secret: str
+        token_url: str
+        protected_url: str
+            Any API endpoint to test existing access token
 
-    Returns
-    -------
-    token: str
-        Access Token
+    Returns:
+        token: str
+            Access Token
     '''
     client_id = kwargs['client_id']
     client_secret = kwargs['client_secret']
@@ -30,10 +28,10 @@ def get_access_token(**kwargs):
         client = OAuth2Session(client_id, token=token)
         probe = client.get(protected_url)
     except TokenExpiredError as error:
-        token = new_token(client_id, client_secret, token_url)
+        token = new_token(token_url, client_id, client_secret)
         save_token(token)
     except ValueError as error:
-        token = new_token(client_id, client_secret, token_url)
+        token = new_token(token_url, client_id, client_secret)
         save_token(token)
 
     return token['token']
@@ -43,9 +41,8 @@ def save_token(token):
     '''
     Store token
 
-    Parameters
-    ----------
-    token: dict
+    Args:
+        token: dict
     '''
     try:
         file = open('token.py', 'w')
@@ -59,8 +56,7 @@ def retrieve_token():
     '''
     Retrieve token if present
 
-    Returns
-    -------
+    Returns:
     token: dict
     '''
     try:
@@ -72,19 +68,17 @@ def retrieve_token():
         raise ValueError
 
 
-def new_token(client_id, client_secret, token_url):
+def new_token(token_url, client_id, client_secret):
     '''
     Generate and return new token dict
 
-    Parameters
-    ----------
-    client_id: str
-    client_secret: str
-    token_url: str
+    Args:
+        token_url: str
+        client_id: str
+        client_secret: str
 
-    Returns
-    -------
-    token: dict
+    Returns:
+        token: dict
     '''
     try:
         client = BackendApplicationClient(client_id=client_id)

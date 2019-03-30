@@ -42,7 +42,7 @@ def save_token(token):
     '''
     Store token
 
-    Paramaters
+    Parameters
     ----------
     token: dict
     '''

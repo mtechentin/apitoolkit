@@ -35,9 +35,9 @@ def get_access_token(**kwargs):
         token = retrieve_token()
         client = OAuth2Session(client_id, token=token)
         probe = client.get(protected_url)
-    except TokenExpiredError as error:
+    except TokenExpiredError as e:
         print(e)
-    except RetrieveError as error:
+    except RetrieveError as e:
         print(e)
     finally:
         return token['token']

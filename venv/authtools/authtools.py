@@ -36,22 +36,21 @@ def get_access_token(**kwargs):
         token = retrieve_token()
         client = OAuth2Session(client_id, token=token)
         probe = client.get(protected_url)
+        return token['token']
     except TokenExpiredError as e:
         print(e)
     except RetrieveError as e:
         print(e)
-    finally:
-        return token['token']
-    # Generate and store new token
+
+    # Generate, store, and return new token
     try:
         token = new_token(token_url, client_id, client_secret)
         save_token(token)
+        return token['token']
     except TokenError as e:
         print('Token Error: ' + e)
     except SaveError as e:
         print(e)
-    finally:
-        return token['token']
 
 
 def save_token(token):
